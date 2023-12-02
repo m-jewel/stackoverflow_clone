@@ -1,0 +1,38 @@
+/* Styles for ShowPosts */
+
+.posts-container {
+    margin-top: 20px;
+  }
+  
+  .add-post-container {
+    margin-bottom: 20px;
+  }
+  
+  .add-post-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #0a9396;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .posts-list {
+    list-style: none;
+  }
+  
+  .post-item {
+    padding: 10px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  .post-item a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  
+  .post-item a:hover {
+    text-decoration: underline;
+  }
+  

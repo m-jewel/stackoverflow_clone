@@ -1,0 +1,9 @@
+.Login {
+    box-sizing:content-box;
+    border-style: groove;
+    padding: 150px;
+}
+
+.login-label {
+    padding: 7.5px;
+}

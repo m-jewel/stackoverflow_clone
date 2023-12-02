@@ -1,0 +1,23 @@
+.welcome-msg {
+    border-style: inset;
+    text-align: center;  
+    font-family:'Times New Roman', Times, serif;
+    font-size:xx-large;
+    padding: 10px;
+
+}
+
+.desc-msg {
+    font-family:'Times New Roman', Times, serif;
+    padding: 10px;
+}
+
+.feature-title {
+    font-family:'Times New Roman', Times, serif;
+    padding: 10px;
+}
+
+.feature-list {
+    font-family: 'Times New Roman', Times, serif;
+}
+
