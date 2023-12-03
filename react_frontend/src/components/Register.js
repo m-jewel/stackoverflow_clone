@@ -5,7 +5,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate(); // Hook to navigate to different routes
+  const navigate = useNavigate(); 
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
@@ -68,13 +68,13 @@ const Register = () => {
         Confim Password:
         <input
           type="password"
-          value={confirmPassword}
+          value={password}
           onChange={(e) => setConfirmPassword(e.target.value)} 
           required
         />
       </label>
 
-      <button type="submit">Register</button> {/* Submit button */}
+      <button type="submit">Register</button> 
     </form>
   );
 };

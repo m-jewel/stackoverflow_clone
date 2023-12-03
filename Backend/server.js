@@ -168,7 +168,8 @@ app.post('/addcomment', (req, res) => {
   });
 });
 
-// Take all the users comments and their usernames of who made them for a 
+// Retrieve comments and structure them for nested display
+// It takes all the users comments and their usernames of  who made them for a 
 // specific post, and sort these comments by their ID in ascending order.
 app.get('/getcomments/:post_id', (req, res) => {
   const post_id = req.params.post_id;
@@ -265,7 +266,7 @@ app.post('/register', async (req, res) => {
     // Insert the new user into the database
     connection.query('INSERT INTO users (name, password) VALUES (?, ?)', [name, password], (error, result) => {
       if (error) {
-        throw error;
+        throw error; // This will be caught by the catch block
       } else {
         res.status(201).json({ message: 'Register successful', name: name });
       }
