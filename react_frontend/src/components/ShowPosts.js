@@ -7,12 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ShowPosts = () => {
-  // State to hold the list of posts and user action
   const [posts, setPosts] = useState([]);
   const [userAction, setUserAction] = useState(null);
   const { user } = useContext(UserContext);
 
-  // Fetch posts when component mounts
   useEffect(() => {
     fetch('http://localhost:8080/getposts')
       .then(response => response.json())

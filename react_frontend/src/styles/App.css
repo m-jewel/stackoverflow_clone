@@ -1,11 +1,9 @@
-/* Reset some default styles */
 body, h1, h2, h3, p, ul, li, form, input, button {
     margin: 0;
     padding: 0;
     list-style: none;
   }
   
-  /* Basic layout styles */
   .App {
     font-family: Arial, sans-serif;
   }
@@ -65,10 +63,7 @@ body, h1, h2, h3, p, ul, li, form, input, button {
   }
   
   .main-content {
-    margin-left: 200px; /* Width of the sidebar */
+    margin-left: 200px; 
     padding: 20px;
   }
-  
-  /* Add styles for your landing page, add post form, and posts list */
-  /* ... */
   

@@ -5,18 +5,15 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Search = () => {
-  // State for storing all posts and filtered posts
   const [allPosts, setAllPosts] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [searchMode, setSearchMode] = useState('default'); // 'default', 'user', 'comment'
-  const [selectedUser, setSelectedUser] = useState(''); // state to keep track of selected user
+  const [searchMode, setSearchMode] = useState('default');
+  const [selectedUser, setSelectedUser] = useState(''); 
   const [users, setUsers] = useState([]);
 
-  // Fetch all posts when the component mounts
   useEffect(() => {
     axios.get('http://localhost:8080/getposts')
       .then(response => {
-        // Set the fetched posts to state
         setAllPosts(response.data.posts);
         setFilteredData(response.data.posts);
       })
@@ -50,7 +47,7 @@ const Search = () => {
 
     switch (searchMode) {
         case 'user':
-            // Perform user-based search
+            // Perform user-based search where output are posts the user created or have commented on
             axios.get(`http://localhost:8080/searchbyuser/${searchValue}`)
                 .then(response => {
                     setFilteredData(response.data.posts);
@@ -60,7 +57,7 @@ const Search = () => {
                 });
             break;
         default:
-            // Perform default search (all posts)
+            // Perform default search which is just show all posts
             axios.get(`http://localhost:8080/searchbystring/${searchValue}`)
                 .then(response => {
                     setFilteredData(response.data.posts);

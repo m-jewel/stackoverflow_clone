@@ -5,7 +5,6 @@ import { faThumbsUp, faThumbsDown, faReply, faTrash } from '@fortawesome/free-so
 import UserContext from '../context/UserContext';
 
 const Comment = ({ comment, onReply, onDelete, isNested }) => {
-  // States for managing reply functionality and likes
   const [showReply, setShowReply] = useState(false);
   const [replyContent, setReplyContent] = useState('');
   const [likes, setLikes] = useState(comment.likes || 0);
@@ -65,8 +64,9 @@ const Comment = ({ comment, onReply, onDelete, isNested }) => {
       <div className='footer'>
         <span className="like-counter">{likes}</span>
         <FontAwesomeIcon icon={faThumbsUp} className="icon" onClick={() => handleLike(comment.id)} />
-    <FontAwesomeIcon icon={faThumbsDown} className="icon" onClick={() => handleDislike(comment.id)} />
+        <FontAwesomeIcon icon={faThumbsDown} className="icon" onClick={() => handleDislike(comment.id)} />
         <FontAwesomeIcon icon={faReply} className="icon" onClick={() => setShowReply(!showReply)} />
+        
         {user && user.name === 'admin' && onDelete && (
           <FontAwesomeIcon icon={faTrash} className="icon delete-icon" onClick={() => onDelete(comment.id)} />
         )}
