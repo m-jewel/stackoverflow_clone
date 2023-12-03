@@ -30,7 +30,7 @@ function App() {
   };
 
   const handleLogin = (userData) => {
-    const userRole = userData.isAdmin ? 'admin' : 'user'; // This assumes your login response contains the isAdmin flag
+    const userRole = userData.isAdmin ? 'admin' : 'user'; 
     setUser({ name: userData.name, id: userData.id, role: userRole });
   };
 
@@ -48,8 +48,8 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <Link to="/Login" className='nav-items'>Log in</Link>
-                    <Link to="/Register" className='nav-items'>Sign up</Link>
+                    <Link to="/login" className='nav-items'>Log in</Link>
+                    <Link to="/register" className='nav-items'>Sign up</Link>
                   </>
                 )}
             </div>
@@ -58,25 +58,25 @@ function App() {
 
         <aside className="sidebar">
           <Link to="/" className='side-items'>Home</Link>
-          <Link to="/ShowPosts" className='side-items'>Questions</Link>
-          <Link to="/ShowUsers" className='side-items'>Users</Link>
-          <Link to="/Search" className='side-items'>Search</Link>
+          <Link to="/showPosts" className='side-items'>Questions</Link>
+          <Link to="/showUsers" className='side-items'>Users</Link>
+          <Link to="/search" className='side-items'>Search</Link>
         </aside>
 
         <main className="main-content">
           <Routes>
             <Route exact path='/' element={<LandingPage/>} />
-            <Route path="/ShowPosts" element={<ShowPosts get={getList}/>} />
-            <Route path="/ShowUsers" element={<ShowUsers />} />
-            <Route path="/AddPost" element={
+            <Route path="/showPosts" element={<ShowPosts get={getList}/>} />
+            <Route path="/showUsers" element={<ShowUsers />} />
+            <Route path="/addPost" element={
               <ProtectedRoute>
                 <AddPost set={setList} />
               </ProtectedRoute>
               } />
             <Route path="/getposts/:id" element={<AddComment />} />
-            <Route path="/Login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/Register" element={<Register />} />
-            <Route path="/Search" element={<Search />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </main>
 

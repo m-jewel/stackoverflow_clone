@@ -1,4 +1,3 @@
-// ShowPosts.js
 import '../styles/ShowPost.css';
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
@@ -88,7 +87,7 @@ const ShowPosts = () => {
   return (
     <div className="posts-container">
       <div className="add-post-container">
-        <Link to="/AddPost" className='add-post-btn'>Add New Post</Link>
+        <Link to="/addPost" className='add-post-btn'>Add New Post</Link>
       </div>
       <ul className="posts-list">
         {posts.map(post => (

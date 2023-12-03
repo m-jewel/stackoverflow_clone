@@ -6,8 +6,8 @@ const AddPost = ({ onAddPost = () => {} }) => {
   const [topic, setTopic] = useState('');
   const [data, setData] = useState('');   
   const { user } = useContext(UserContext); 
-  const navigate = useNavigate(); // Hook to navigate between routes
-
+  const navigate = useNavigate(); 
+  
   // Function to handle the submission of a new post
   const handleAddPost = () => {
     // Check if the user is logged in
@@ -51,7 +51,7 @@ const AddPost = ({ onAddPost = () => {} }) => {
         />
       </label>
       <br />
-      <button onClick={handleAddPost}>Add Post</button>
+      <button className='add-post-btn' onClick={handleAddPost}>Add Post</button>
     </div>
   );
 };
