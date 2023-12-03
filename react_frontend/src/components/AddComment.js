@@ -106,16 +106,16 @@ const AddComment = () => {
             if (response.ok) {
                 const replyData = await response.json();
                 const newReplyObj = {
-                    id: replyData.id, // The ID returned from the server
-                    username: user.name, // Assuming you have the username in the user context
+                    id: replyData.id,
+                    username: user.name, 
                     comment: content,
-                    replies: [], // Start with an empty replies array
-                    parent_id: parentId, // Set the parent_id to link it to the parent comment
+                    replies: [], 
+                    parent_id: parentId, 
                 };
     
-                // Update the nestedComments state to include the new reply
+                // Updating the nestedComments state to include the new reply
                 setNestedComments(currentComments => {
-                    // Function to recursively find and update the parent comment with the new reply
+                    // Recursively find and update the parent comment with the new reply
                     const addReplyToComment = (comments, parentId, reply) => {
                         return comments.map(comment => {
                             if (comment.id === parentId) {
@@ -165,7 +165,6 @@ const AddComment = () => {
           });
       
           if (response.ok) {
-            // Update the state to reflect the deletion
             const updatedComments = removeNestComment(nestedComments, commentId);
             setNestedComments(updatedComments);
           } else {

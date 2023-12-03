@@ -169,28 +169,29 @@ app.post('/addcomment', (req, res) => {
 });
 
 // Retrieve comments and structure them for nested display
-// Give me all the comments and the usernames of the users who made them for a 
+// It takes all the users comments and their usernames of  who made them for a 
 // specific post, and sort these comments by their ID in ascending order.
 app.get('/getcomments/:post_id', (req, res) => {
   const post_id = req.params.post_id;
-  const sql = `SELECT c.*, u.name AS username, COALESCE(SUM(cl.action), 0) as likes
-               FROM comments c
-               JOIN users u ON c.user_id = u.id
-               LEFT JOIN comment_likes cl ON c.id = cl.comment_id
-               WHERE c.post_id = ?
-               GROUP BY c.id
-               ORDER BY c.id`;
+  const sql = `
+    SELECT c.*, u.name AS username, 
+           (SELECT IFNULL(SUM(action), 0) 
+            FROM comment_likes 
+            WHERE comment_id = c.id) AS likes
+    FROM comments c
+    JOIN users u ON c.user_id = u.id
+    WHERE c.post_id = ?
+    ORDER BY c.id`;
 
   connection.query(sql, [post_id], function (error, comments) {
     if (error) {
-      console.log(error);
+      console.error('Error retrieving comments:', error);
       res.status(500).send('Error retrieving comments');
     } else {
       res.json({ comments: comments });
     }
   });
 });
-
 
 // User Stuff Login and Registration Stuff
 const authenticateToken = (req, res, next) => {
@@ -397,13 +398,13 @@ app.post('/updateLikes/post/:postId', (req, res) => {
     }
 
     if (results.length === 0) {
-      // User hasn't liked/disliked this comment, so insert new action
+      // User hasn't liked/disliked this post, so insert new action
       connection.query('INSERT INTO post_likes (post_id, user_id, action) VALUES (?, ?, ?)', [postId, userId, delta], (insertError) => {
         if (insertError) {
           console.error(insertError);
           return res.status(500).send("Error recording like/dislike action");
         }
-        // Update the likes count on the comment
+        // Update the likes count on the post
         connection.query('UPDATE posts SET likes = likes + ? WHERE id = ?', [delta, postId], (updateError) => {
           if (updateError) {
             console.error(updateError);
