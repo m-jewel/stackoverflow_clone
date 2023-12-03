@@ -5,7 +5,16 @@ const Register = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [skillLevel, setSkillLevel] = useState({
+    beginner: false,
+    intermediate: false,
+    expert: false,
+  });
   const navigate = useNavigate(); 
+
+  const handleSkillChange = (e) => {
+    setSkillLevel({ ...skillLevel, [e.target.name]: e.target.checked });
+  };
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
@@ -16,6 +25,11 @@ const Register = () => {
       alert('Passwords do not match! Please try again!')
       return;
     }
+  
+    let selectedSkills = [];
+    for (const [key, value] of Object.entries(skillLevel)) {
+      if (value) selectedSkills.push(key);
+    }
 
     // Else, register the user 
     try {
@@ -24,7 +38,7 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, password }), 
+        body: JSON.stringify({ name, password, skillLevel: selectedSkills }), 
       });
 
       if (response.ok) {
@@ -68,11 +82,39 @@ const Register = () => {
         Confim Password:
         <input
           type="password"
-          value={password}
+          value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)} 
           required
         />
       </label>
+
+      <label>
+          <input
+            type="checkbox"
+            name="beginner"
+            checked={skillLevel.beginner}
+            onChange={handleSkillChange}
+          />
+          Beginner
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="intermediate"
+            checked={skillLevel.intermediate}
+            onChange={handleSkillChange}
+          />
+          Intermediate
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="expert"
+            checked={skillLevel.expert}
+            onChange={handleSkillChange}
+          />
+          Expert
+        </label>
 
       <button type="submit">Register</button> 
     </form>
