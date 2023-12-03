@@ -15,17 +15,28 @@ body, h1, h2, h3, p, ul, li, form, input, button {
     justify-content: space-between;
     align-items: center;
     background-color: #4a4848;
-    padding: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
-  
-  .search-form input {
-    padding: 8px 10px 8px 32px;
-    margin-right: 5px;
-    flex-grow: 1;
+
+  .top-bar div a {
+  margin: 0 10px;
+  color: #087f7b;
+  text-decoration: none;
   }
-  
-  .search-form button {
+
+  .top-bar div button {
+    background: none;
+    border: none;
+    cursor: pointer;
     padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #6d6d6d;
+    color: #ffffff;
+  }
+
+  .top-bar div a:hover, .top-bar div button:hover {
+    color: #0a9396; /* Highlight on hover */
   }
   
   .nav-items {
@@ -47,8 +58,9 @@ body, h1, h2, h3, p, ul, li, form, input, button {
   
   .sidebar {
     position: fixed;
-    top: 40px; /* Height of the top bar */
+    top: 45px; /* Height of the top bar */
     left: 0;
+    max-height: fit-content;
     width: 200px;
     height: calc(100% - 50px);
     background-color: #e4e6e8;
@@ -105,4 +117,17 @@ body, h1, h2, h3, p, ul, li, form, input, button {
   form button:hover {
     background-color: #087f7b;
   }
+
+  @media (max-width: 768px) {
+    .top-bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   
+    .top-bar div {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 10px;
+    }
+  }

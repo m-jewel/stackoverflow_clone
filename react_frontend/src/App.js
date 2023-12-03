@@ -14,6 +14,7 @@ import UserContext from './context/UserContext';
 import ShowUsers from './components/ShowUsers';
 import AddComment from './components/AddComment';
 import Search from './components/Search';
+import UserProfile from './components/UserProfile';
 
 function App() {   
   const [user, setUser] = useState(null);
@@ -43,7 +44,7 @@ function App() {
               <div>
                 {user ? (
                   <>
-                    <span>{user.name}</span>
+                    <Link to="/userProfile">{user.name} </Link>
                     <button onClick={handleLogout}>Log out</button>
                   </>
                 ) : (
@@ -77,6 +78,7 @@ function App() {
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/userProfile" element={<UserProfile />} />
           </Routes>
         </main>
 

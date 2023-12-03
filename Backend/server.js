@@ -519,5 +519,37 @@ app.get('/postsbycommentcount', (req, res) => {
   });
 });
 
+app.post('/updatePassword/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const { newPassword } = req.body;
+
+  const query = 'UPDATE users SET password = ? WHERE id = ?';
+  connection.query(query, [newPassword, userId], (error, result) => {
+    if (error) {
+      console.error('Error updating password:', error);
+      res.status(500).send('Error updating password');
+    } else {
+      res.send('Password updated successfully');
+    }
+  });
+});
+
+app.get('/userDetails/:userId', (req, res) => {
+  const userId = req.params.userId;
+  connection.query('SELECT * FROM users WHERE id = ?', [userId], (error, results) => {
+    if (error) {
+      console.error('Error fetching user details:', error);
+      res.status(500).send('Error fetching user details');
+    } else {
+      if (results.length > 0) {
+        const userDetails = results[0];
+        res.json({ name: userDetails.name, skillLevel: userDetails.skill_level });
+      } else {
+        res.status(404).send('User not found');
+      }
+    }
+  });
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
