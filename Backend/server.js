@@ -46,6 +46,7 @@ app.get('/init', (req, res) => {
         name VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         isAdmin BOOLEAN NOT NULL DEFAULT FALSE,
+        skill_level VARCHAR(255),
         PRIMARY KEY (id))`, function (error, result) {
         if (error) return console.log(error);
       });
@@ -245,9 +246,9 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-  const { name, password } = req.body;
-
+  const { name, password, skillLevel } = req.body;
   try {
+
     // Check if the user already exists
     const userExists = await new Promise((resolve, reject) => {
       connection.query('SELECT * FROM users WHERE name = ?', [name], (error, results) => {
@@ -262,11 +263,14 @@ app.post('/register', async (req, res) => {
     if (userExists) {
       return res.status(409).send('User already exists');
     }
+    
+    const skillLevelStr = skillLevel.join(',');
 
     // Insert the new user into the database
-    connection.query('INSERT INTO users (name, password) VALUES (?, ?)', [name, password], (error, result) => {
+    connection.query('INSERT INTO users (name, password, skill_level) VALUES (?, ?, ?)',  
+    [name, password, skillLevelStr], (error, result) => {
       if (error) {
-        throw error; // This will be caught by the catch block
+        throw error;
       } else {
         res.status(201).json({ message: 'Register successful', name: name });
       }
